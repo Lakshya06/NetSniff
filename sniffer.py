@@ -4,6 +4,8 @@ import socket
 import struct
 from ethernet import *
 
+ETH_P_ALL = 0x03  # to listen all types of packets
+
 s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(ETH_P_ALL)) # Create a socket with .AF_PACKET -> To create a socket with low level packet access, send and receive raw data frames .SOCK_RAW -> Raw sockets to access protocols that are not usually allowed
 # This will return raw ethernet frame without the last 4 bits checksum: 6 byte dest MAC, 6 byte source MAC, 2 byte ether type, 46-1500 byte Payload
 
@@ -13,4 +15,5 @@ while True:
     # print(raw_data[:14])
     # print(f"[ Frame -> Dest: {readable_mac(dest_mac)}; Source: {readable_mac(src_mac)}; EtherType: {hex(ethertype)} ]")
     # print(raw_data[14:])
-    print(ethernet(raw_data))
+    frame = ethernet(raw_data)
+    print(frame)

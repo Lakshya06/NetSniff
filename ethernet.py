@@ -3,9 +3,7 @@
 import struct
 from ethertype_read import ETHER_TYPE
 
-ETH_P_ALL = 0x03  # to listen all types of packets
-
-def ethernet(data):
+def ethernet(data): # Main Function
     dest, src, ethertype, data = parse_ether_frame(data)
     dest = readable_mac(dest)
     src = readable_mac(src)
@@ -25,10 +23,10 @@ def readable_mac(data): # Making mac form readable
     return res
 
 def ethertype_read(ethertype):
-    ether = hex(ethertype)
+    ether = hex(ethertype) # converting to hexadecimal
     res = "UNKNOWN"
 
-    if ethertype in ETHER_TYPE:
+    if ethertype in ETHER_TYPE: # converting to string if found in dict
         res = ETHER_TYPE[ethertype]
     
     return res
