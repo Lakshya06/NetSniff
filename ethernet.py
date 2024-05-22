@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
 import struct
-from ethertype_read import ETHER_TYPE
+from etherytype_and_ipv4proto import ETHER_TYPE
 
 def ethernet(data): # Main Function
     dest, src, ethertype, data = parse_ether_frame(data)
     dest = readable_mac(dest)
     src = readable_mac(src)
-    ethertype = ethertype_read(ethertype)
+    ethertype_readable = ethertype_read(ethertype)
 
-    return (f"[Ethernet - {ethertype}]; Source: {src}; Destination: {dest}; Len: {len(data)}")
+    return (f"[Ethernet - {ethertype_readable}]; Source: {src}; Destination: {dest}; Len: {len(data)}", ethertype, data)
 
 def parse_ether_frame(data):
     dest_mac, src_mac, ethertype = struct.unpack('! 6s 6s H', data[:14]) # Parsing raw data packet to get source, dest mac and ethertype
