@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import struct
-from etherytype_and_ipv4proto import IP_PROTO
+from extras.etherytype_and_ipv4proto import IP_PROTO
 
 def ipv4_frame(data):
     ipv4_ver_ihl, ipv4_dcp_ecn, ipv4_len, ipv4_id, ipv4_flags_offset, ipv4_ttl, ipv4_protocol, ipv4_checksum, ipv4_src, ipv4_dest, ipv4_extra = parse_ipv4_frame(data)

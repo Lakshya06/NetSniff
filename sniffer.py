@@ -4,6 +4,7 @@ import socket
 import struct
 from ethernet import *
 from ipv4_frame import *
+from extras.colors import *
 
 ETH_P_ALL = 0x03  # to listen all types of packets
 ipv4_id = 0x0800
@@ -22,4 +23,4 @@ while True:
     #ipv4
     if etherype == ipv4_id:
         packet = ipv4_frame(ether_payload)
-        print(" └─ " + packet)
+        print(blue(" └─ " + packet))

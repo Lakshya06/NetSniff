@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import struct
-from etherytype_and_ipv4proto import ETHER_TYPE
+from extras.etherytype_and_ipv4proto import ETHER_TYPE
 
 def ethernet(data): # Main Function
     dest, src, ethertype, data = parse_ether_frame(data)
