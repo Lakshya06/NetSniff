@@ -30,5 +30,6 @@ while True:
         # print(ipv4_protocol)
 
         if ipv4_protocol == udp_id:
-            segment = udp_segment(ipv4_payload)
+            segment, hexdumped_data = udp_segment(ipv4_payload)
             print(yellow("   └─ " + segment))
+            print(yellow(hexdumped_data))
