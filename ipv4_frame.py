@@ -18,7 +18,7 @@ def ipv4_frame(data):
     ipv4_options = ipv4_extra[:ipv4_options_len]
     ipv4_payload = ipv4_extra[ipv4_options_len:]
 
-    return (f"[ IPV4 - Protocol: {ipv4_protocol} {ipv4_proto_readable}; Source: {ipv4_src}; Destination: {ipv4_dest}]")
+    return (f"[ IPV4 - Protocol: {ipv4_protocol} {ipv4_proto_readable}; Source: {ipv4_src}; Destination: {ipv4_dest}]", ipv4_protocol, ipv4_payload)
 
 def parse_ipv4_frame(data):
     ipv4_ver_ihl, ipv4_dscp_ecn, ipv4_len, ipv4_id, ipv4_flags_offset, ipv4_ttl, ipv4_proto, ipv4_checksum, ipv4_src, ipv4_dest = struct.unpack("! B B H H H B B H 4s 4s", data[:20]) # retreiving all the ipv4 header feilds, 20 bytes, after 20 bytes there is data
@@ -31,7 +31,7 @@ def readable_ipv4(data):
     for i in data:
         res += format(i, 'd') # parsing the ipv4 bits into decimal
         res += '.'
-    
+
     return res
 
 def readable_protocol(data):
@@ -42,4 +42,3 @@ def readable_protocol(data):
         res = IP_PROTO[data]
     
     return res
-
