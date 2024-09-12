@@ -39,10 +39,10 @@ while True:
             segment, hexdumped_data = udp_segment(ipv4_payload)
             # print(yellow("   └─ " + segment))
             # print(yellow(hexdumped_data))
-            print(segment)
+            print(segment, end="")
         if ipv4_protocol == tcp_id:
             segment, data = tcp_segment(ipv4_payload)
             # print(green("   └─ " + segment))
             # print(green(data))
-            print(segment)
+            print(segment, end="")
     print("\n")
