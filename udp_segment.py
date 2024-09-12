@@ -5,7 +5,8 @@ import struct
 def udp_segment(data):
     udp_src, udp_dest, udp_len, udp_checksum, udp_extra = parse_udp_segment(data)
     hexdump_data = hexdump(udp_extra)
-    return (f"[ UDP - Source Port: {udp_src}; Destination Port: {udp_dest}; LEN: {udp_len}]", hexdump_data)
+    return (f"{udp_src}, {udp_dest}", hexdump_data)
+    # return (f"[ UDP - Source Port: {udp_src}; Destination Port: {udp_dest}; LEN: {udp_len}]", hexdump_data)
 
 def parse_udp_segment(data):        # parsing udp segment
     src, dest, lent, checksm = struct.unpack("! H H H H", data[:8])
@@ -36,4 +37,4 @@ def hexdump(data):
         res += "\n"
         curr += 16
 
-    return res 
+    return res

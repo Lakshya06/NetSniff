@@ -9,7 +9,8 @@ def ethernet(data): # Main Function
     src = readable_mac(src)
     ethertype_readable = ethertype_read(ethertype)
 
-    return (f"[Ethernet - {ethertype_readable}]; Source: {src}; Destination: {dest}; Len: {len(data)}", ethertype, data)
+    return (f"{src}, {dest}", ethertype, data)
+    # return (f"[Ethernet - {ethertype_readable}]; Source: {src}; Destination: {dest}; Len: {len(data)}", ethertype, data)
 
 def parse_ether_frame(data):
     dest_mac, src_mac, ethertype = struct.unpack('! 6s 6s H', data[:14]) # Parsing raw data packet to get source, dest mac and ethertype
@@ -30,5 +31,3 @@ def ethertype_read(ethertype):
         res = ETHER_TYPE[ethertype]
     
     return res
-
-
