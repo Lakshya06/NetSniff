@@ -14,7 +14,7 @@ udp_id = 0x11
 tcp_id = 0x06
 # print(udp_id)
 
-s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(ETH_P_ALL)) 
+s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(ETH_P_ALL))
 # Create a socket with .AF_PACKET -> To create a socket with low level packet access, without any protocol send and receive raw data frames .
 # SOCK_RAW -> Raw sockets to access protocols that are not usually allowed
 # This will return raw ethernet frame without the last 4 bits checksum: 6 byte dest MAC, 6 byte source MAC, 2 byte ether type, 46-1500 byte Payload
