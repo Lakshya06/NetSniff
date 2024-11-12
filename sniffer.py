@@ -27,34 +27,38 @@ while True:
     raw_data, addr = s.recvfrom(65565) # 65565 is the buffersize to receive
 
     #Ethernet
-    frame, etherype, ether_payload = ethernet(raw_data)
+    frame, etherype, ether_payload = ethernet(raw_data)[0]
+    frame_to_print  = ethernet(raw_data)[1]
     # print(etherype)
-    print(frame+",", end="")
+    print(frame_to_print)
     f.write(frame+",")
 
     #ipv4
     if etherype == ipv4_id:
-        packet, ipv4_protocol, ipv4_payload = ipv4_frame(ether_payload)
-        # print(blue(" └─ " + packet))
-        print(packet+",", end="")
+        packet, ipv4_protocol, ipv4_payload = ipv4_frame(ether_payload)[0]
+        packet_to_print = ipv4_frame(ether_payload)[1]
+        print(blue(" └─ " + packet_to_print))
+        # print(packet_to_print+",", end="")
         f.write(packet+",")
         # print(ipv4_protocol)
         # print(ipv4_protocol)
 
         if ipv4_protocol == udp_id:
-            segment, hexdumped_data = udp_segment(ipv4_payload)
-            # print(yellow("   └─ " + segment))
-            # print(yellow(hexdumped_data))
+            segment, hexdumped_data = udp_segment(ipv4_payload)[0]
+            segment_to_print = udp_segment(ipv4_payload)[1]
+            print(yellow("   └─ " + segment))
+            print(yellow(hexdumped_data))
             print(segment, end="")
             f.write(segment)
         if ipv4_protocol == tcp_id:
-            segment, data = tcp_segment(ipv4_payload)
-            # print(green("   └─ " + segment))
-            # print(green(data))
-            print(segment, end="")
+            segment, data = tcp_segment(ipv4_payload)[0]
+            segment_to_print = tcp_segment(ipv4_payload)[1]
+            print(green("   └─ " + segment_to_print))
+            print(green(data))
+            # print(segment, end="")
             f.write(segment)
             
     f.write("\n")
-    print("\n")
+    # print("\n")
 
 f.close()

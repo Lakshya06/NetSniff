@@ -5,7 +5,7 @@ import struct
 def tcp_segment(data):
     tcp_src, tcp_dest, tcp_seq, tcp_ack_num, tcp_offest_flags, tcp_winsize, tcp_checksum, tcp_urg_ptr, tcp_extra = parse_tcp(data)
     hexdump_data = hexdump(tcp_extra)
-    return (f"{tcp_src}, {tcp_dest}", hexdump_data)
+    return [(f"{tcp_src}, {tcp_dest}", hexdump_data), f"[ TCP - Source Port: {tcp_src}; Destination Port: {tcp_dest}; LEN: {tcp_winsize}]"]
     # return (f"[ TCP - Source Port: {tcp_src}; Destination Port: {tcp_dest}; LEN: {tcp_winsize}]", hexdump_data)
 
 

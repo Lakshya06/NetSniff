@@ -9,7 +9,7 @@ def ethernet(data): # Main Function
     src = readable_mac(src)
     ethertype_readable = ethertype_read(ethertype)
 
-    return (f"{src}, {dest}", ethertype, data)
+    return [(f"{src}, {dest}", ethertype, data), (f"[Ethernet - {ethertype_readable}]; Source: {src}; Destination: {dest}; Len: {len(data)}")]
     # return (f"[Ethernet - {ethertype_readable}]; Source: {src}; Destination: {dest}; Len: {len(data)}", ethertype, data)
 
 def parse_ether_frame(data):

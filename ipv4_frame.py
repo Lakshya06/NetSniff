@@ -18,7 +18,7 @@ def ipv4_frame(data):
     ipv4_options = ipv4_extra[:ipv4_options_len]
     ipv4_payload = ipv4_extra[ipv4_options_len:]
 
-    return (f"{ipv4_proto_readable}, {ipv4_src}, {ipv4_dest}", ipv4_protocol, ipv4_payload)
+    return [(f"{ipv4_proto_readable}, {ipv4_src}, {ipv4_dest}", ipv4_protocol, ipv4_payload), (f"[ IPV4 - Protocol: {ipv4_protocol} {ipv4_proto_readable}; Source: {ipv4_src}; Destination: {ipv4_dest}]")]
     # return (f"[ IPV4 - Protocol: {ipv4_protocol} {ipv4_proto_readable}; Source: {ipv4_src}; Destination: {ipv4_dest}]", ipv4_protocol, ipv4_payload)
 
 def parse_ipv4_frame(data):
