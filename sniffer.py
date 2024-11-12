@@ -19,6 +19,10 @@ s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(ETH_P_ALL))
 # SOCK_RAW -> Raw sockets to access protocols that are not usually allowed
 # This will return raw ethernet frame without the last 4 bits checksum: 6 byte dest MAC, 6 byte source MAC, 2 byte ether type, 46-1500 byte Payload
 
+with open("dummyData5.txt", "w") as file:
+    pass
+
+f = open("dummyData5.txt", "a")
 while True:
     raw_data, addr = s.recvfrom(65565) # 65565 is the buffersize to receive
 
@@ -26,12 +30,14 @@ while True:
     frame, etherype, ether_payload = ethernet(raw_data)
     # print(etherype)
     print(frame+",", end="")
+    f.write(frame+",")
 
     #ipv4
     if etherype == ipv4_id:
         packet, ipv4_protocol, ipv4_payload = ipv4_frame(ether_payload)
         # print(blue(" └─ " + packet))
         print(packet+",", end="")
+        f.write(packet+",")
         # print(ipv4_protocol)
         # print(ipv4_protocol)
 
@@ -40,9 +46,15 @@ while True:
             # print(yellow("   └─ " + segment))
             # print(yellow(hexdumped_data))
             print(segment, end="")
+            f.write(segment)
         if ipv4_protocol == tcp_id:
             segment, data = tcp_segment(ipv4_payload)
             # print(green("   └─ " + segment))
             # print(green(data))
             print(segment, end="")
+            f.write(segment)
+            
+    f.write("\n")
     print("\n")
+
+f.close()
